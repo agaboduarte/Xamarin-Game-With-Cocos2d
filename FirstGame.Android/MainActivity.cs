@@ -7,22 +7,26 @@ using Android.Content.PM;
 
 namespace FirstGame.Android
 {
-    [Activity(Label = "FirstGame.Android", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = ScreenOrientation.Landscape)]
+    [Activity(
+        Label = "FirstGame.Android", 
+        MainLauncher = true, 
+        Icon = "@drawable/icon",
+        Theme = "@style/Theme.Splash",
+        AlwaysRetainTaskState = true,
+        LaunchMode = LaunchMode.SingleInstance,
+        ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden | ConfigChanges.Keyboard | ConfigChanges.ScreenSize,
+        ScreenOrientation = ScreenOrientation.Landscape)]
     public class MainActivity : AndroidGameActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            Game game = new MyGame();
+            var game = new MyGame();
 
-            var frameLayout = new FrameLayout(this);
+            SetContentView(game.Services.GetService<View>());
 
-            frameLayout.AddView(game.Services.GetService<View>());
-
-            SetContentView(frameLayout);
-
-            game.Run(GameRunBehavior.Asynchronous);
+            game.Run();
         }
     }
 }
