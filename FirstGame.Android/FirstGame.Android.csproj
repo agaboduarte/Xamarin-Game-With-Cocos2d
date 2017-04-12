@@ -58,7 +58,28 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GettingStarted.Xamarin" />
+    <AndroidAsset Include="Content\fonts\arial-12.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-16.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-18.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-20.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-22.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-24.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-26.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-28.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-30.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-32.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-34.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-38.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-50.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-64.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-unicode-26.fnt.xnb" />
+    <AndroidAsset Include="Content\fonts\arial-unicode-26.xnb" />
+    <AndroidAsset Include="Content\fonts\Arial.xnb" />
+    <AndroidAsset Include="Content\fonts\arial16.fnt.xnb" />
+    <AndroidAsset Include="Content\fonts\arial16.xnb" />
+    <AndroidAsset Include="Content\fonts\MarkerFelt-16.xnb" />
+    <AndroidAsset Include="Content\fonts\MarkerFelt-18.xnb" />
+    <AndroidAsset Include="Content\fonts\MarkerFelt-22.xnb" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
@@ -76,6 +97,29 @@
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\cocos2d-xna\box2d\box2d.Android.csproj">
+      <Project>{b81b6701-7a78-4846-bf6f-04e0591f0f38}</Project>
+      <Name>box2d.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\cocos2d-xna\cocos2d\cocos2d.Android.csproj">
+      <Project>{64725c5b-a1bc-4974-8538-a1158babf572}</Project>
+      <Name>cocos2d.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\cocos2d-xna\MonoGame\MonoGame.Framework\MonoGame.Framework.Android.csproj">
+      <Project>{ba9476cf-99ba-4d03-92f2-73d2c5e58883}</Project>
+      <Name>MonoGame.Framework.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\cocos2d-xna\MonoGame\MonoGame.Framework\MonoGame.Framework.Net.Android.csproj">
+      <Project>{713ee5ca-c850-42ad-ac67-b6546ac8bffb}</Project>
+      <Name>MonoGame.Framework.Net.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\cocos2d-xna\MonoGame\ThirdParty\Lidgren.Network\Lidgren.Network.Android.csproj">
+      <Project>{565129e0-4ee5-4f6f-b403-c3484c9740be}</Project>
+      <Name>Lidgren.Network.Android</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="..\FirstGame\FirstGame.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.
