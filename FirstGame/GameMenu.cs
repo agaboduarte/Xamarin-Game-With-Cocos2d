@@ -262,7 +262,7 @@ namespace FirstGame
 
         public void Update(GameTime gameTime)
         {
-            BackLabel.Text = $"Back {time.Elapsed.TotalSeconds}";
+            BackLabel.Text = $"Back {time.Elapsed.TotalSeconds.ToString("N0")}";
             BackLabel.Color = new CCColor3B(Color.Red);
 
             var h = ContentSize.Height;
@@ -276,7 +276,7 @@ namespace FirstGame
                 if (BackMenu.PositionX < 0)
                 {
                     BackMenu.PositionX = 0;
-                    reverse  =true;
+                    reverse = true;
                 }
             }
 
@@ -284,9 +284,8 @@ namespace FirstGame
             {
                 BackMenu.PositionX += 2;
 
-                if (BackMenu.PositionX + BackMenu.ContentSize.Width > w)
+                if (BackMenu.PositionX > w)
                 {
-                    BackMenu.PositionX = w - BackMenu.ContentSize.Width;
                     reverse = true;
                 }
             }
