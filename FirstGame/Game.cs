@@ -18,7 +18,7 @@ namespace FirstGame
             Content.RootDirectory = "Content";
 
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
 
             Components.Add(new AppDelegate(this, graphics));
         }
