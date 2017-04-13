@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FirstGame
@@ -43,6 +44,14 @@ namespace FirstGame
             }
 
             // TODO: Add your update logic here
+
+            if (CCDirector.SharedDirector.RunningScene != null && CCDirector.SharedDirector.RunningScene.Children != null)
+            {
+                foreach (var item in CCDirector.SharedDirector.RunningScene.Children.OfType<IGameLoop>())
+                {
+                    item.Update(gameTime);
+                }
+            }
 
             base.Update(gameTime);
         }

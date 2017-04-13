@@ -11,16 +11,18 @@ namespace FirstGame.Android
         Label = "FirstGame.Android", 
         MainLauncher = true, 
         Icon = "@drawable/icon",
-        Theme = "@style/Theme.Splash",
+        Theme = "@android:style/Theme.NoTitleBar.Fullscreen",
         AlwaysRetainTaskState = true,
         LaunchMode = LaunchMode.SingleInstance,
-        ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden | ConfigChanges.Keyboard | ConfigChanges.ScreenSize,
-        ScreenOrientation = ScreenOrientation.Landscape)]
+        ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden | ConfigChanges.ScreenSize,
+        ScreenOrientation = ScreenOrientation.SensorLandscape)]
     public class MainActivity : AndroidGameActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            RequestWindowFeature(WindowFeatures.NoTitle);
 
             var game = new MyGame();
 

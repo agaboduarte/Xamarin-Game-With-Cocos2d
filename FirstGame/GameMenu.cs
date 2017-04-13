@@ -2,14 +2,18 @@ using System;
 
 using Microsoft.Xna.Framework;
 using Cocos2D;
+using System.Diagnostics;
 
 namespace FirstGame
 {
-    public class GameMenu : CCLayer
+    public class GameMenu : CCLayer, IGameLoop
     {
         CCMenu VoiceFXMenu;
         CCMenu SoundFXMenu;
         CCMenu AmbientFXMenu;
+
+        CCLabelTTF BackLabel;
+        CCMenu BackMenu;
 
         CCPoint VoiceFXMenuLocation;
         CCPoint SoundFXMenuLocation;
@@ -23,6 +27,8 @@ namespace FirstGame
 
         string ambientButtonName;
         string ambientButtonNameDim;
+
+        Stopwatch time;
 
         public GameMenu()
         {
@@ -46,9 +52,9 @@ namespace FirstGame
             IsAmbientFXMenuActive = !GameData.SharedData.AreAmbientFXMuted;
 
             AddChild(
-                new CCMenu(
+                BackMenu = new CCMenu(
                     new CCMenuItemLabel(
-                        new CCLabelTTF("Back", "MarkerFelt", 18),
+                        BackLabel = new CCLabelTTF("Back", "MarkerFelt", 18),
                         (cc) =>
                         {
                             CCDirector.SharedDirector.PopScene();
@@ -62,6 +68,8 @@ namespace FirstGame
                     Position = CCDirector.SharedDirector.WinSize.Center
                 }
             );
+
+            time = Stopwatch.StartNew();
         }
 
         void PlayNegativeSound(object sender)
@@ -248,6 +256,45 @@ namespace FirstGame
             GameData.SharedData.AreAmbientFXMuted = false;
 
             IsAmbientFXMenuActive = false;
+        }
+
+        bool left = false;
+
+        public void Update(GameTime gameTime)
+        {
+            BackLabel.Text = $"Back {time.Elapsed.TotalSeconds}";
+            BackLabel.Color = new CCColor3B(Color.Red);
+
+            var h = ContentSize.Height;
+            var w = ContentSize.Width;
+            var reverse = false;
+
+            if (left)
+            {
+                BackMenu.PositionX += -2;
+
+                if (BackMenu.PositionX < 0)
+                {
+                    BackMenu.PositionX = 0;
+                    reverse  =true;
+                }
+            }
+
+            if (!left)
+            {
+                BackMenu.PositionX += 2;
+
+                if (BackMenu.PositionX + BackMenu.ContentSize.Width > w)
+                {
+                    BackMenu.PositionX = w - BackMenu.ContentSize.Width;
+                    reverse = true;
+                }
+            }
+
+            if (reverse)
+            {
+                left = !left;
+            }
         }
 
         #endregion
