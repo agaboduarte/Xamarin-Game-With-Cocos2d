@@ -8,16 +8,16 @@ namespace FirstGame
 {
     public class GameMenu : CCLayer, IGameLoop
     {
-        CCMenu VoiceFXMenu;
-        CCMenu SoundFXMenu;
-        CCMenu AmbientFXMenu;
+        CCMenu voiceFXMenu;
+        CCMenu soundFXMenu;
+        CCMenu ambientFXMenu;
 
-        CCLabelTTF BackLabel;
-        CCMenu BackMenu;
+        CCLabelTTF backLabel;
+        CCMenu backMenu;
 
-        CCPoint VoiceFXMenuLocation;
-        CCPoint SoundFXMenuLocation;
-        CCPoint AmbientFXMenuLocation;
+        CCPoint voiceFXMenuLocation;
+        CCPoint soundFXMenuLocation;
+        CCPoint ambientFXMenuLocation;
 
         string voiceButtonName;
         string voiceButtonNameDim;
@@ -41,9 +41,11 @@ namespace FirstGame
             ambientButtonName = "AmbientFX";
             ambientButtonNameDim = "AmbientFX";
 
-            SoundFXMenuLocation = new CCPoint(110, 55);
-            VoiceFXMenuLocation = new CCPoint(230, 55);
-            AmbientFXMenuLocation = new CCPoint(355, 55);
+            soundFXMenuLocation = new CCPoint(110, 55);
+            voiceFXMenuLocation = new CCPoint(230, 55);
+            ambientFXMenuLocation = new CCPoint(355, 55);
+
+            time = Stopwatch.StartNew();
 
             TouchEnabled = true;
 
@@ -51,25 +53,24 @@ namespace FirstGame
             IsVoiceFXMenuActive = !GameData.SharedData.AreVoiceFXMuted;
             IsAmbientFXMenuActive = !GameData.SharedData.AreAmbientFXMuted;
 
-            AddChild(
-                BackMenu = new CCMenu(
-                    new CCMenuItemLabel(
-                        BackLabel = new CCLabelTTF("Back", "MarkerFelt", 18),
-                        (cc) =>
-                        {
-                            CCDirector.SharedDirector.PopScene();
-                        }
-                    )
-                    {
-                        Color = new CCColor3B(Color.Blue)
-                    }
-                )
-                {
-                    Position = CCDirector.SharedDirector.WinSize.Center
-                }
-            );
+            backLabel = new CCLabelTTF("Back", "MarkerFelt", 18);
+                      
+            var menuItemLabel = new CCMenuItemLabel(backLabel)
+            {
+                Color = new CCColor3B(Color.Blue)
+            };
 
-            time = Stopwatch.StartNew();
+            menuItemLabel.SetTarget((cc) =>
+            {
+                CCDirector.SharedDirector.PopScene();
+            });
+
+            backMenu = new CCMenu(menuItemLabel)
+            {
+                Position = CCDirector.SharedDirector.WinSize.Center
+            };
+
+            AddChild(backMenu);
         }
 
         void PlayNegativeSound(object sender)
@@ -124,7 +125,7 @@ namespace FirstGame
         {
             set
             {
-                RemoveChild(VoiceFXMenu, true);
+                RemoveChild(voiceFXMenu, true);
                 CCMenuItem button1;
                 CCLabelTTF label;
 
@@ -141,10 +142,10 @@ namespace FirstGame
                     button1 = new CCMenuItemLabel(label, TurnVoiceFXOff);
                 }
 
-                VoiceFXMenu = new CCMenu(button1);
-                VoiceFXMenu.Position = VoiceFXMenuLocation;
+                voiceFXMenu = new CCMenu(button1);
+                voiceFXMenu.Position = voiceFXMenuLocation;
 
-                AddChild(VoiceFXMenu, 10);
+                AddChild(voiceFXMenu, 10);
             }
         }
 
@@ -170,7 +171,7 @@ namespace FirstGame
         {
             set
             {
-                RemoveChild(SoundFXMenu, true);
+                RemoveChild(soundFXMenu, true);
 
                 CCMenuItemLabel button1;
 
@@ -189,10 +190,10 @@ namespace FirstGame
                     button1 = new CCMenuItemLabel(label, TurnSoundFXOff);
                 }
 
-                SoundFXMenu = new CCMenu(button1);
-                SoundFXMenu.Position = SoundFXMenuLocation;
+                soundFXMenu = new CCMenu(button1);
+                soundFXMenu.Position = soundFXMenuLocation;
 
-                AddChild(SoundFXMenu, 10);
+                AddChild(soundFXMenu, 10);
             }
         }
 
@@ -218,7 +219,7 @@ namespace FirstGame
         {
             set
             {
-                RemoveChild(AmbientFXMenu, true);
+                RemoveChild(ambientFXMenu, true);
 
                 CCMenuItemLabel button1;
 
@@ -237,10 +238,10 @@ namespace FirstGame
                     button1 = new CCMenuItemLabel(label, TurnAmbientFXOff);
                 }
 
-                AmbientFXMenu = new CCMenu(button1);
-                AmbientFXMenu.Position = AmbientFXMenuLocation;
+                ambientFXMenu = new CCMenu(button1);
+                ambientFXMenu.Position = ambientFXMenuLocation;
 
-                AddChild(AmbientFXMenu, 10);
+                AddChild(ambientFXMenu, 10);
             }
         }
 
@@ -262,8 +263,8 @@ namespace FirstGame
 
         public void Update(GameTime gameTime)
         {
-            BackLabel.Text = $"Back {time.Elapsed.TotalSeconds.ToString("N0")}";
-            BackLabel.Color = new CCColor3B(Color.Red);
+            backLabel.Text = $"Back {time.Elapsed.TotalSeconds.ToString("N0")}";
+            backLabel.Color = new CCColor3B(Color.Red);
 
             var h = ContentSize.Height;
             var w = ContentSize.Width;
@@ -271,20 +272,20 @@ namespace FirstGame
 
             if (left)
             {
-                BackMenu.PositionX += -2;
+                backMenu.PositionX += -2;
 
-                if (BackMenu.PositionX < 0)
+                if (backMenu.PositionX < 0)
                 {
-                    BackMenu.PositionX = 0;
+                    backMenu.PositionX = 0;
                     reverse = true;
                 }
             }
 
             if (!left)
             {
-                BackMenu.PositionX += 2;
+                backMenu.PositionX += 2;
 
-                if (BackMenu.PositionX > w)
+                if (backMenu.PositionX > w)
                 {
                     reverse = true;
                 }

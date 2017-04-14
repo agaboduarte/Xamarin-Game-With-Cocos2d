@@ -7,15 +7,9 @@ namespace FirstGame
 {
     public class AppDelegate : CCApplication
     {
-        int preferredWidth;
-        int preferredHeight;
-
         public AppDelegate(Game game, GraphicsDeviceManager graphics)
             : base(game, graphics)
         {
-            preferredWidth = 480;
-            preferredHeight = 320;
-
             CCDrawManager.InitializeDisplay(game, graphics, DisplayOrientation.Default);
         }
 
@@ -40,7 +34,7 @@ namespace FirstGame
             CCDirector.SharedDirector.Projection = CCDirectorProjection.Projection2D;
             CCDirector.SharedDirector.RunWithScene(IntroLayer.Scene);
 
-            CCDrawManager.SetDesignResolutionSize(preferredWidth, preferredHeight, CCResolutionPolicy.ExactFit);
+            CCDrawManager.SetDesignResolutionSize(width: 480, height: 320, resolutionPolicy: CCResolutionPolicy.FixedHeight);
 
             return true;
         }

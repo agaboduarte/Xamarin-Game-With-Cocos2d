@@ -43,13 +43,14 @@ namespace FirstGame
                 ProcessBackClick();
             }
 
-            // TODO: Add your update logic here
-
             if (CCDirector.SharedDirector.RunningScene != null && CCDirector.SharedDirector.RunningScene.Children != null)
             {
-                foreach (var item in CCDirector.SharedDirector.RunningScene.Children.OfType<IGameLoop>())
+                foreach (var item in CCDirector.SharedDirector.RunningScene.Children)
                 {
-                    item.Update(gameTime);
+                    if (item is IGameLoop gameLoop)
+                    {
+                        gameLoop.Update(gameTime);
+                    }
                 }
             }
 

@@ -22,8 +22,6 @@ namespace FirstGame.Android
         {
             base.OnCreate(bundle);
 
-            RequestWindowFeature(WindowFeatures.NoTitle);
-
             var game = new MyGame();
 
             SetContentView(game.Services.GetService<View>());
