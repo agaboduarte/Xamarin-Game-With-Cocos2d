@@ -272,7 +272,7 @@ namespace FirstGame
 
             if (left)
             {
-                backMenu.PositionX += -2;
+                backMenu.PositionX += -1;
 
                 if (backMenu.PositionX < 0)
                 {
@@ -283,7 +283,7 @@ namespace FirstGame
 
             if (!left)
             {
-                backMenu.PositionX += 2;
+                backMenu.PositionX += 1;
 
                 if (backMenu.PositionX > w)
                 {
